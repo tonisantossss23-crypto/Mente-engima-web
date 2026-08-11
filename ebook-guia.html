@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+  doc-page:not(:defined){visibility:hidden}
+  html,body{margin:0;background:#0a0a0a;}
+  ::selection{background:#c9b896;color:#0a0a0a}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0a0a0a"/><circle cx="50" cy="42" r="26" fill="none" stroke="#c9b896" stroke-width="1.5" opacity=".5"/><text x="50" y="52" font-family="Georgia,serif" font-size="14" fill="#c9b896" text-anchor="middle" font-style="italic">PDF</text></svg></template>
+
+<x-import component-from-global-scope="doc-page" from="./doc-page.js" size="letter" orientation="portrait" margin="0" hint-size="100%,100%">
+<div style="background:#0a0a0a;color:#f5efe6;font-family:'Inter',system-ui,sans-serif;font-weight:300;padding:0.9in;box-sizing:border-box;">
+
+  <!-- COVER -->
+  <div style="min-height:9in;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;break-inside:avoid;">
+    <div style="font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:30px;">Mente Enigma</div>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:52px;line-height:1.1;color:#f5efe6;max-width:12ch;margin:0;">Racional vs. Emocional</h1>
+    <p style="margin:22px 0 0;color:#8a857d;font-size:15px;letter-spacing:.05em;">El patrón que decide por ti antes de que decidas tú</p>
+    <div style="width:36px;height:1px;background:#9a9590;opacity:.5;margin-top:40px;"></div>
+    <div style="margin-top:40px;font-size:11px;letter-spacing:.2em;color:#8a857d;">@menteenigma</div>
+  </div>
+
+  <!-- TOC -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#c9b896;margin-bottom:24px;">Índice</div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(245,239,230,.1);padding-bottom:14px;"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5efe6;">Antes de empezar — no hay tipos puros</span><span style="font-size:12px;color:#8a857d;">03</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(245,239,230,.1);padding-bottom:14px;"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5efe6;">01 · Cómo se forma tu patrón</span><span style="font-size:12px;color:#8a857d;">04</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(245,239,230,.1);padding-bottom:14px;"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5efe6;">02 · Cuándo te traiciona</span><span style="font-size:12px;color:#8a857d;">05</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(245,239,230,.1);padding-bottom:14px;"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5efe6;">03 · Cómo leer al otro tipo</span><span style="font-size:12px;color:#8a857d;">06</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(245,239,230,.1);padding-bottom:14px;"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5efe6;">04 · Ejercicios para el otro lado</span><span style="font-size:12px;color:#8a857d;">07</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;border-bottom:1px solid rgba(245,239,230,.1);padding-bottom:14px;"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5efe6;">05 · Autodiagnóstico: tu semana bajo la lupa</span><span style="font-size:12px;color:#8a857d;">08</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:14px;"><span style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#f5efe6;">Resumen práctico</span><span style="font-size:12px;color:#8a857d;">09</span></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#c9b896;margin-bottom:18px;">Antes de empezar</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:32px;color:#f5efe6;margin:0 0 20px;">No hay tipos puros</h2>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 16px;">El test te dio una etiqueta: racional o emocional. Es útil, pero es una simplificación. En psicología, esta idea viene de la <em style="color:#c9b896;font-style:italic;">teoría del procesamiento dual</em>: convivimos con dos sistemas de pensamiento, uno rápido e intuitivo y otro lento y deliberado. Todos usamos los dos — la diferencia está en cuál toma el mando primero, y con qué frecuencia se lo dejas.</p>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0;">Esta guía no busca que cambies de tipo. Busca que veas el patrón en marcha, en tiempo real, antes de que ya haya decidido por ti.</p>
+  </div>
+
+  <!-- 01 -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#c9b896;letter-spacing:.1em;margin-bottom:16px;">01</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:0 0 20px;">Cómo se forma tu patrón</h2>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 16px;">Tu tendencia a razonar o sentir primero no nace de un rasgo fijo de personalidad — se entrena. Cada vez que una decisión rápida te sale bien, refuerzas el atajo emocional. Cada vez que pararte a analizar te evita un error, refuerzas el hábito racional. Con los años, uno de los dos caminos se vuelve tu configuración por defecto: el que usas sin darte cuenta de que estás eligiendo.</p>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 16px;">Esto importa porque el patrón no es "quién eres" — es "qué practicaste". Y lo que se entrena, se puede reentrenar. La pregunta útil no es "¿soy racional o emocional?", sino "¿en qué contextos dejo que decida el piloto automático?".</p>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0;">Identificar el origen de tu patrón — no su etiqueta — es el primer paso para dejar de ser su ejecutor pasivo.</p>
+  </div>
+
+  <!-- 02 -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#c9b896;letter-spacing:.1em;margin-bottom:16px;">02</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:0 0 20px;">Cuándo te traiciona</h2>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 16px;">Ningún estilo es superior en abstracto — cada uno falla en escenarios distintos. El pensador racional se paraliza cuando la situación exige una respuesta emocional inmediata: consolar, conectar, ceder. Sigue "analizando" cuando ya no toca analizar, y eso se lee como frialdad aunque no lo sea.</p>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 16px;">El pensador emocional, al revés, se hunde en decisiones que exigen distancia: negociar, cortar pérdidas, decir que no. Ahí la emoción decide antes de que los hechos lleguen a la mesa, y luego se justifica el resultado como si hubiera sido razonado.</p>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0;">Tu punto ciego no está en tu tipo — está en no notar cuándo el contexto pedía el otro.</p>
+  </div>
+
+  <!-- 03 -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#c9b896;letter-spacing:.1em;margin-bottom:16px;">03</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:0 0 20px;">Cómo leer al otro tipo</h2>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 16px;">La mayoría de los conflictos de pareja, familia o trabajo entre estilos opuestos no son de fondo — son de ritmo y lenguaje. El racional quiere resolver; el emocional quiere ser oído antes de que nadie resuelva nada. Cuando uno salta a la solución y el otro sigue en la emoción, ambos sienten que el otro "no entiende", y ninguno está siendo escuchado del todo.</p>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 16px;">Reconocer el estilo del otro te da una instrucción simple: ante un emocional, valida antes de proponer. Ante un racional, presenta el problema con estructura antes de esperar cercanía. No es cambiar quién eres — es traducir cómo lo dices.</p>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0;">La fricción baja no cuando los dos piensan igual, sino cuando cada uno sabe leer el idioma del otro.</p>
+  </div>
+
+  <!-- 04 -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#c9b896;letter-spacing:.1em;margin-bottom:16px;">04</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:0 0 24px;">Ejercicios para el otro lado</h2>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:18px;color:#f5efe6;margin:0 0 8px;">Si eres racional: la pausa de los 90 segundos</h3>
+    <p style="font-size:14px;line-height:1.75;color:#cfc8bd;margin:0 0 20px;">Antes de responder a algo cargado emocionalmente, espera 90 segundos sin analizar — solo nota qué sientes en el cuerpo, sin ponerle nombre todavía. Responde después. Entrenas el músculo de sentir antes de resolver.</p>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:18px;color:#f5efe6;margin:0 0 8px;">Si eres emocional: la regla de las tres razones</h3>
+    <p style="font-size:14px;line-height:1.75;color:#cfc8bd;margin:0 0 20px;">Antes de decidir algo importante desde cómo te sientes, escribe tres razones objetivas — hechos, no sensaciones — que apoyen o contradigan esa decisión. No tienen que ganar a la emoción. Solo tienen que estar sobre la mesa antes de decidir.</p>
+
+    <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:18px;color:#f5efe6;margin:0 0 8px;">Para los dos: nombrar el modo</h3>
+    <p style="font-size:14px;line-height:1.75;color:#cfc8bd;margin:0;">Antes de una conversación difícil, dite en voz baja "estoy en modo racional" o "estoy en modo emocional". El simple acto de nombrarlo te saca del piloto automático — y desde ahí, puedes elegir en vez de reaccionar.</p>
+  </div>
+
+  <!-- 05 -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#c9b896;letter-spacing:.1em;margin-bottom:16px;">05</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:0 0 20px;">Autodiagnóstico: tu semana bajo la lupa</h2>
+    <p style="font-size:15px;line-height:1.8;color:#cfc8bd;margin:0 0 24px;">Elige tres momentos de esta semana en los que tuvieras que decidir algo — grande o pequeño. Para cada uno, responde estas cuatro preguntas antes de seguir leyendo. No hay respuesta correcta; el valor está en notar el patrón, no en juzgarlo.</p>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div style="border-left:2px solid rgba(201,184,150,.4);padding-left:18px;"><p style="font-size:14px;line-height:1.7;color:#f5efe6;margin:0;">¿Qué decidiste primero: los hechos o cómo te sentías?</p></div>
+      <div style="border-left:2px solid rgba(201,184,150,.4);padding-left:18px;"><p style="font-size:14px;line-height:1.7;color:#f5efe6;margin:0;">¿La situación pedía en realidad el otro modo?</p></div>
+      <div style="border-left:2px solid rgba(201,184,150,.4);padding-left:18px;"><p style="font-size:14px;line-height:1.7;color:#f5efe6;margin:0;">¿Alguien más se vio afectado por ir en piloto automático?</p></div>
+      <div style="border-left:2px solid rgba(201,184,150,.4);padding-left:18px;"><p style="font-size:14px;line-height:1.7;color:#f5efe6;margin:0;">Si lo repitieras hoy, ¿qué nombrarías antes de actuar?</p></div>
+    </div>
+    <p style="font-size:14px;line-height:1.8;color:#8a857d;margin:24px 0 0;">Repite este ejercicio cada domingo durante un mes. El patrón no cambia por leerlo una vez — cambia por notarlo repetidamente, hasta que notarlo se vuelva automático.</p>
+  </div>
+
+  <!-- RESUMEN -->
+  <div style="break-before:page;padding-top:.3in;">
+    <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#c9b896;margin-bottom:18px;">Resumen práctico</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:0 0 24px;">Para volver a esta guía en 30 segundos</h2>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="display:flex;gap:14px;align-items:baseline;"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#c9b896;font-size:15px;">—</span><p style="font-size:14px;line-height:1.7;color:#cfc8bd;margin:0;">Tu patrón se entrenó, no naciste con él — y por eso se puede reentrenar.</p></div>
+      <div style="display:flex;gap:14px;align-items:baseline;"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#c9b896;font-size:15px;">—</span><p style="font-size:14px;line-height:1.7;color:#cfc8bd;margin:0;">Tu punto ciego no es tu tipo — es no notar cuándo el momento pedía el otro.</p></div>
+      <div style="display:flex;gap:14px;align-items:baseline;"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#c9b896;font-size:15px;">—</span><p style="font-size:14px;line-height:1.7;color:#cfc8bd;margin:0;">Con el otro tipo, la fricción baja traduciendo, no discutiendo.</p></div>
+      <div style="display:flex;gap:14px;align-items:baseline;"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#c9b896;font-size:15px;">—</span><p style="font-size:14px;line-height:1.7;color:#cfc8bd;margin:0;">Racional: pausa 90 segundos antes de resolver. Emocional: escribe tres razones antes de decidir.</p></div>
+      <div style="display:flex;gap:14px;align-items:baseline;"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#c9b896;font-size:15px;">—</span><p style="font-size:14px;line-height:1.7;color:#cfc8bd;margin:0;">Nombrar el modo en voz baja te devuelve la elección.</p></div>
+      <div style="display:flex;gap:14px;align-items:baseline;"><span style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#c9b896;font-size:15px;">—</span><p style="font-size:14px;line-height:1.7;color:#cfc8bd;margin:0;">Repite el autodiagnóstico cada domingo — el cambio viene de notarlo, no de leerlo.</p></div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div style="break-before:page;padding-top:2.5in;text-align:center;">
+    <div style="width:36px;height:1px;background:#9a9590;opacity:.5;margin:0 auto 30px;"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;color:#f5efe6;max-width:26ch;margin:0 auto;line-height:1.5;">No se trata de elegir un bando. Se trata de notar, cada vez más rápido, cuál está al volante.</p>
+    <div style="margin-top:50px;font-size:11px;letter-spacing:.2em;color:#8a857d;">Mente Enigma · @menteenigma</div>
+  </div>
+
+</div>
+</x-import>
+
+</x-dc>
+</body>
+</html>

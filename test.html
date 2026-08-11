@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+  @keyframes halo-breathe{0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
+  @keyframes fadeUp{0%{opacity:0;transform:translateY(14px)}100%{opacity:1;transform:translateY(0)}}
+  html,body{margin:0;background:#0a0a0a;}
+  a{color:#c9b896;text-decoration:none}
+  a:hover{color:#f5efe6}
+  ::selection{background:#c9b896;color:#0a0a0a}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0a0a0a"/><circle cx="50" cy="42" r="26" fill="none" stroke="#c9b896" stroke-width="1.5" opacity=".5"/><text x="50" y="52" font-family="Georgia,serif" font-size="20" fill="#c9b896" text-anchor="middle" font-style="italic">Test</text></svg></template>
+
+<div style="position:relative;min-height:100vh;background:#0a0a0a;color:#f5efe6;font-family:'Inter',system-ui,sans-serif;font-weight:300;overflow:hidden;">
+
+  <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 50% 40% at 50% 0%,rgba(201,184,150,.08),transparent 65%);"></div>
+
+  <!-- NAV -->
+  <div style="position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(24px,5vw,64px);">
+    <a href="./index.html" style="font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.34em;color:#f5efe6;font-weight:400;">M<span style="color:#9a9590;">·</span>E<span style="color:#9a9590;">·</span>C</a>
+    <a href="./index.html" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#cfc8bd;">Inicio</a>
+  </div>
+
+  <!-- INTRO -->
+  <sc-if value="{{ isIntro }}" hint-placeholder-val="{{ true }}">
+    <div style="position:relative;z-index:3;max-width:640px;margin:0 auto;padding:60px 24px 120px;text-align:center;display:flex;flex-direction:column;align-items:center;animation:fadeUp .6s ease both;">
+      <div style="font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:32px;display:flex;align-items:center;gap:16px;"><span style="width:28px;height:1px;background:#9a9590;opacity:.5;"></span>Test gratuito<span style="width:28px;height:1px;background:#9a9590;opacity:.5;"></span></div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,6vw,60px);line-height:1.08;color:#f5efe6;margin:0;">¿Piensas o <em style="font-style:italic;color:#c9b896;">sientes</em> primero?</h1>
+      <p style="margin:26px 0 0;color:#8a857d;font-size:16px;line-height:1.75;font-weight:300;max-width:44ch;">15 escenarios cotidianos. Sin respuestas correctas — solo la tuya, la que das antes de pensarla demasiado.</p>
+      <button onclick="{{ start }}" style="margin-top:48px;background:#f5efe6;color:#0a0a0a;border:none;cursor:pointer;padding:18px 44px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;font-family:inherit;">Empezar el test</button>
+      <span style="margin-top:22px;font-size:11px;letter-spacing:.1em;color:#8a857d;">15 preguntas · 3 minutos</span>
+    </div>
+  </sc-if>
+
+  <!-- QUESTION -->
+  <sc-if value="{{ isQuestion }}">
+    <div style="position:relative;z-index:3;max-width:680px;margin:0 auto;padding:40px 24px 120px;animation:fadeUp .45s ease both;">
+      <div style="height:2px;background:rgba(245,239,230,.08);width:100%;margin-bottom:14px;"><div style="height:100%;background:#c9b896;width:{{ progressPct }}%;transition:width .3s ease;"></div></div>
+      <div style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;margin-bottom:40px;">Pregunta {{ qNumber }} / {{ qTotal }}</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,4vw,36px);line-height:1.3;color:#f5efe6;margin:0 0 44px;">{{ qText }}</h2>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <button onclick="{{ chooseA }}" style="text-align:left;background:transparent;border:1px solid rgba(245,239,230,.14);color:#cfc8bd;padding:22px 26px;font-size:16px;font-family:inherit;font-weight:300;cursor:pointer;line-height:1.5;" style-hover="border-color:rgba(201,184,150,.6);color:#f5efe6;background:rgba(201,184,150,.05);">{{ optA }}</button>
+        <button onclick="{{ chooseB }}" style="text-align:left;background:transparent;border:1px solid rgba(245,239,230,.14);color:#cfc8bd;padding:22px 26px;font-size:16px;font-family:inherit;font-weight:300;cursor:pointer;line-height:1.5;" style-hover="border-color:rgba(201,184,150,.6);color:#f5efe6;background:rgba(201,184,150,.05);">{{ optB }}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- RESULT -->
+  <sc-if value="{{ isResult }}">
+    <div style="position:relative;z-index:3;max-width:640px;margin:0 auto;padding:50px 24px 140px;text-align:center;animation:fadeUp .5s ease both;">
+      <div style="position:absolute;left:50%;top:10%;transform:translate(-50%,-50%);width:min(560px,80vw);height:min(560px,80vw);z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 45%,rgba(201,184,150,.16) 0%,rgba(201,184,150,.05) 25%,transparent 55%);filter:blur(20px);animation:halo-breathe 7s ease-in-out infinite;"></div>
+      <div style="font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:26px;">Tu resultado</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,6vw,54px);line-height:1.1;color:#f5efe6;margin:0;">{{ resultTitle }}</h2>
+      <p style="margin:24px auto 0;max-width:46ch;color:#cfc8bd;font-size:16px;line-height:1.75;font-weight:300;">{{ resultDesc }}</p>
+
+      <div style="margin:48px 0 8px;display:flex;height:10px;width:100%;overflow:hidden;">
+        <div style="height:100%;background:#c9b896;width:{{ rPct }}%;"></div>
+        <div style="height:100%;background:rgba(245,239,230,.14);width:{{ ePct }}%;"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#8a857d;">
+        <span>Racional {{ rPct }}%</span>
+        <span>Emocional {{ ePct }}%</span>
+      </div>
+
+      <div style="margin-top:56px;border-top:1px solid rgba(245,239,230,.08);padding-top:44px;">
+        <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#9a9590;margin-bottom:18px;">Esto es solo la superficie</div>
+        <p style="color:#8a857d;font-size:15px;line-height:1.7;font-weight:300;max-width:44ch;margin:0 auto 34px;">Hay una guía que profundiza en cómo tu tipo de pensamiento decide por ti sin que lo notes — y qué hacer con eso.</p>
+        <a href="./ebook.html" style="display:inline-flex;align-items:center;gap:12px;background:#f5efe6;color:#0a0a0a;padding:18px 40px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;">Ver la guía completa<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <button onclick="{{ restart }}" style="margin-top:32px;background:transparent;border:none;color:#8a857d;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-family:inherit;">Repetir el test</button>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { screen: 'intro', qIndex: 0, rCount: 0, eCount: 0 };
+
+  questions = [
+    { text: 'Cuando tomas una decisión importante...', a: 'Hago una lista de pros y contras.', b: 'Sigo lo que me dice el cuerpo.' },
+    { text: 'Ante un conflicto con alguien...', a: 'Busco los hechos antes de opinar.', b: 'Necesito sentir que me entienden.' },
+    { text: 'Si algo no tiene lógica pero funciona...', a: 'No lo acepto del todo, aunque funcione.', b: 'Me da igual por qué, si funciona.' },
+    { text: 'Cuando alguien llora delante de ti...', a: 'Pienso en cómo resolver el problema.', b: 'Solo quiero acompañar, no arreglar nada.' },
+    { text: 'Tu memoria guarda sobre todo...', a: 'Datos, fechas, argumentos.', b: 'Cómo te hizo sentir cada momento.' },
+    { text: 'Ante una crítica...', a: 'La analizo para ver si tiene razón.', b: 'Me afecta antes de poder pensarla.' },
+    { text: 'Al elegir pareja o amigos...', a: 'Miro si encajamos en la práctica.', b: 'Miro si conecto de verdad.' },
+    { text: 'Cuando ganas una discusión...', a: 'Es porque tenía mejores argumentos.', b: 'A veces gano y ni sé cómo.' },
+    { text: 'Un problema sin resolver te...', a: 'Inquieta hasta encontrar la solución.', b: 'Pesa, aunque tenga solución.' },
+    { text: 'Tomar una decisión bajo presión...', a: 'Me organizo, hago un plan rápido.', b: 'Voy con lo que me sale de dentro.' },
+    { text: 'Ver una película triste...', a: 'La analizo, entiendo por qué funciona.', b: 'La vivo, me quedo tocado un rato.' },
+    { text: 'Cuando alguien no cumple lo prometido...', a: 'Reviso los hechos antes de juzgar.', b: 'Se me nota en la cara al instante.' },
+    { text: 'Un buen día es aquel en el que...', a: 'Fui productivo y logré lo que quería.', b: 'Me sentí en paz con alguien.' },
+    { text: 'Explicas mejor las cosas...', a: 'Con datos y estructura.', b: 'Con ejemplos que se sienten cercanos.' },
+    { text: 'Si tuvieras que arrepentirte de algo...', a: 'Sería de una decisión mal calculada.', b: 'Sería de no haber dicho lo que sentía.' }
+  ];
+
+  start = () => this.setState({ screen: 'question', qIndex: 0, rCount: 0, eCount: 0 });
+  restart = () => this.setState({ screen: 'intro', qIndex: 0, rCount: 0, eCount: 0 });
+
+  choose = (type) => {
+    this.setState((s) => {
+      const qIndex = s.qIndex + 1;
+      const rCount = s.rCount + (type === 'r' ? 1 : 0);
+      const eCount = s.eCount + (type === 'e' ? 1 : 0);
+      const screen = qIndex >= this.questions.length ? 'result' : 'question';
+      return { screen, qIndex, rCount, eCount };
+    });
+  };
+
+  renderVals() {
+    const { screen, qIndex, rCount, eCount } = this.state;
+    const total = this.questions.length;
+    const q = this.questions[Math.min(qIndex, total - 1)];
+    const answered = rCount + eCount;
+    const progressPct = Math.round((answered / total) * 100);
+    const rPct = answered ? Math.round((rCount / answered) * 100) : 50;
+    const ePct = 100 - rPct;
+
+    let resultTitle, resultDesc;
+    if (rCount >= 10) {
+      resultTitle = 'Pensador racional';
+      resultDesc = 'Decides con la cabeza primero y sientes después — o eso te dices. Tu punto ciego: a veces confundes analizar con sentir de verdad.';
+    } else if (eCount >= 10) {
+      resultTitle = 'Pensador emocional';
+      resultDesc = 'Sientes antes de entender por qué. Tu punto ciego: a veces la emoción decide y la razón solo firma después, convencida de que fue idea suya.';
+    } else {
+      resultTitle = 'Mente híbrida';
+      resultDesc = 'No tienes un piloto fijo — cambias de razón a emoción según lo que está en juego. Útil casi siempre, confuso cuando más lo necesitas.';
+    }
+
+    return {
+      isIntro: screen === 'intro', isQuestion: screen === 'question', isResult: screen === 'result',
+      qNumber: qIndex + 1, qTotal: total, qText: q.text, optA: q.a, optB: q.b,
+      progressPct, rPct, ePct, resultTitle, resultDesc,
+      start: this.start, restart: this.restart,
+      chooseA: () => this.choose('r'), chooseB: () => this.choose('e')
+    };
+  }
+}
+</script>
+</body>
+</html>

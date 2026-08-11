@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+  @keyframes halo-breathe{0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
+  @keyframes logo-float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+  @keyframes ray-spin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @keyframes dropline{0%,100%{opacity:.2;transform:scaleY(.6) translateY(-10px)}50%{opacity:1;transform:scaleY(1) translateY(0)}}
+  html,body{margin:0;background:#0a0a0a;}
+  a{color:#c9b896;text-decoration:none}
+  a:hover{color:#f5efe6}
+  ::selection{background:#c9b896;color:#0a0a0a}
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0a0a0a"/><circle cx="50" cy="42" r="26" fill="none" stroke="#c9b896" stroke-width="1.5" opacity=".5"/><text x="50" y="52" font-family="Georgia,serif" font-size="26" fill="#c9b896" text-anchor="middle" font-style="italic">M·E·C</text></svg></template>
+
+<div style="position:relative;background:#0a0a0a;color:#f5efe6;font-family:'Inter',system-ui,sans-serif;font-weight:300;overflow:hidden;">
+
+  <!-- NAV -->
+  <div style="position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(24px,5vw,64px);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);background:linear-gradient(180deg,rgba(10,10,10,.82) 0%,rgba(10,10,10,.4) 70%,rgba(10,10,10,0) 100%);">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.34em;color:#f5efe6;font-weight:400;">M<span style="color:#9a9590;">·</span>E<span style="color:#9a9590;">·</span>C</div>
+    <div style="display:flex;gap:clamp(20px,3vw,42px);align-items:center;">
+      <a href="#sobre" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#cfc8bd;">Sobre mí</a>
+      <a href="#temas" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#cfc8bd;">Temas</a>
+      <a href="./test.html" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#cfc8bd;">Test</a>
+      <a href="https://www.tiktok.com/@menteenigma" target="_blank" style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#f5efe6;border:1px solid rgba(245,239,230,.14);padding:10px 20px;">Seguir en TikTok</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px clamp(24px,5vw,56px) 80px;overflow:hidden;margin-top:-84px;">
+    <div style="position:absolute;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 50% 40% at 50% 38%,rgba(201,184,150,.10),transparent 65%),radial-gradient(ellipse 80% 60% at 50% 100%,rgba(201,184,150,.05),transparent 60%);"></div>
+    <div style="position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:min(760px,88vw);height:min(760px,88vw);z-index:1;pointer-events:none;background:radial-gradient(circle at 50% 45%,rgba(201,184,150,.18) 0%,rgba(201,184,150,.06) 25%,transparent 55%),radial-gradient(circle at 50% 50%,rgba(245,239,230,.05) 0%,transparent 60%);filter:blur(20px);animation:halo-breathe 7s ease-in-out infinite;"></div>
+    <div style="position:absolute;left:50%;top:46%;width:min(520px,64vw);height:min(520px,64vw);transform:translate(-50%,-50%);z-index:1;pointer-events:none;mix-blend-mode:screen;opacity:.45;background:conic-gradient(from 0deg,transparent 0deg,rgba(245,239,230,.08) 30deg,rgba(201,184,150,.18) 60deg,rgba(245,239,230,.08) 90deg,transparent 120deg,transparent 360deg);border-radius:50%;-webkit-mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 70%);mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 70%);animation:ray-spin 22s linear infinite;"></div>
+
+    <div style="position:relative;z-index:3;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:44px;display:flex;align-items:center;gap:18px;">
+      <span style="width:32px;height:1px;background:#9a9590;opacity:.5;"></span>Divulgación psicológica<span style="width:32px;height:1px;background:#9a9590;opacity:.5;"></span>
+    </div>
+
+    <div style="position:relative;z-index:3;width:min(320px,64vw);height:min(224px,45vw);margin-bottom:38px;background-image:url('assets/logo-mec-clean.png');background-size:contain;background-position:center;background-repeat:no-repeat;filter:drop-shadow(0 0 28px rgba(201,184,150,.45)) drop-shadow(0 24px 36px rgba(0,0,0,.55));animation:logo-float 6s ease-in-out infinite;"></div>
+
+    <h1 style="position:relative;z-index:3;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(44px,7vw,80px);line-height:1.02;letter-spacing:-.01em;text-align:center;max-width:15ch;margin:0;color:#f5efe6;">La mente esconde más de lo que <em style="font-style:italic;color:#c9b896;">admite</em></h1>
+    <p style="position:relative;z-index:3;margin:30px 0 0;max-width:52ch;text-align:center;color:#8a857d;font-size:16px;line-height:1.7;font-weight:300;">Psicología sin adornos: sesgos, sombra y todo eso que haces sin darte cuenta. Lo que en TikTok cabe en un minuto, aquí se mira con calma.</p>
+
+    <div style="position:relative;z-index:3;margin-top:56px;padding:8px;">
+      <a href="./test.html" style="background:#f5efe6;color:#0a0a0a;padding:20px 46px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;display:inline-flex;align-items:center;gap:12px;">Hacer el test<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <a href="https://www.tiktok.com/@menteenigma" target="_blank" style="position:relative;z-index:3;margin-top:20px;color:#8a857d;font-size:11px;letter-spacing:.2em;text-transform:uppercase;">o sígueme en TikTok</a>
+
+    <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#8a857d;display:flex;flex-direction:column;align-items:center;gap:12px;">@menteenigma<span style="width:1px;height:44px;background:linear-gradient(180deg,#9a9590,transparent);animation:dropline 2.4s ease-in-out infinite;"></span></div>
+  </div>
+
+  <!-- SOBRE MÍ -->
+  <div id="sobre" style="max-width:1400px;margin:0 auto;padding:clamp(80px,12vw,140px) clamp(24px,5vw,56px);display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(40px,6vw,72px);align-items:center;border-top:1px solid rgba(245,239,230,.06);">
+    <div style="position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid rgba(245,239,230,.12);background:radial-gradient(ellipse 70% 60% at 50% 35%,rgba(201,184,150,.18),transparent 65%),linear-gradient(135deg,#1a1816 0%,#0a0a0a 70%);">
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;">
+        <defs>
+          <linearGradient id="sil" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#c9b896" stop-opacity=".55"/><stop offset="50%" stop-color="#9a9590" stop-opacity=".25"/><stop offset="100%" stop-color="#0a0a0a" stop-opacity="0"/></linearGradient>
+          <linearGradient id="sil2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f5efe6" stop-opacity=".16"/><stop offset="100%" stop-color="#9a9590" stop-opacity="0"/></linearGradient>
+        </defs>
+        <g transform="translate(60,40)" fill="url(#sil2)" opacity=".7"><path d="M180,40 C220,40 250,70 255,115 C258,140 252,162 244,182 C238,196 232,208 232,224 L240,238 C246,247 244,256 234,260 L222,264 C218,278 215,296 215,312 C215,330 224,344 240,352 L268,365 L320,365 L320,40 Z"/></g>
+        <g transform="translate(60,40)" fill="none" stroke="url(#sil)" stroke-width="1.2"><path d="M180,40 C220,40 250,70 255,115 C258,140 252,162 244,182 C238,196 232,208 232,224 L240,238 C246,247 244,256 234,260 L222,264 C218,278 215,296 215,312 C215,330 224,344 240,352 L268,365"/><circle cx="218" cy="128" r="2" fill="#c9b896" stroke="none"/></g>
+      </svg>
+      <div style="position:absolute;top:28px;left:28px;display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#9a9590;"><span style="width:6px;height:6px;border-radius:50%;background:#c9b896;box-shadow:0 0 12px #c9b896;"></span>Detrás del canal</div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:22px;">Quién soy</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,56px);line-height:1.06;letter-spacing:-.01em;color:#f5efe6;max-width:16ch;margin:0 0 30px;">Alguien que estudió la mente y no sabe callárselo</h2>
+      <p style="font-size:17px;line-height:1.75;color:#cfc8bd;font-weight:300;max-width:50ch;margin:0 0 22px;">Detrás de <strong style="color:#f5efe6;font-weight:400;">Mente Enigma</strong> hay una obsesión: entender por qué hacemos lo que hacemos, incluso cuando juraríamos que no. Sesgos, defensas, la parte de ti que prefieres no mirar.</p>
+      <p style="font-size:17px;line-height:1.75;color:#8a857d;font-weight:300;max-width:50ch;margin:0;">No es autoayuda. No hay soles ni <em style="font-style:italic;">journeys</em>. Es psicología de verdad, contada como si te la explicara alguien de confianza a media voz.</p>
+      <div style="margin-top:44px;display:flex;gap:16px;align-items:center;"><span style="width:48px;height:1px;background:#9a9590;"></span><span style="width:5px;height:5px;border-radius:50%;background:#c9b896;"></span><span style="width:48px;height:1px;background:#9a9590;"></span></div>
+    </div>
+  </div>
+
+  <!-- TEMAS -->
+  <div id="temas" style="padding:clamp(80px,12vw,140px) clamp(24px,5vw,56px);background:linear-gradient(180deg,#0a0a0a,#111110);border-top:1px solid rgba(245,239,230,.06);">
+    <div style="max-width:1400px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;gap:40px;flex-wrap:wrap;">
+        <div>
+          <div style="font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:18px;">Temas que trato</div>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(36px,5vw,56px);line-height:1.05;color:#f5efe6;max-width:16ch;margin:0;">Lo que la mente hace <em style="font-style:italic;color:#c9b896;">a tus espaldas</em></h2>
+        </div>
+        <span style="font-size:13px;letter-spacing:.02em;color:#8a857d;max-width:26ch;font-weight:300;">Cada semana, un fenómeno psicológico y su lado incómodo.</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;">
+        <div style="border:1px solid rgba(245,239,230,.10);padding:38px 34px;min-height:280px;display:flex;flex-direction:column;background:radial-gradient(ellipse at 30% 20%,rgba(201,184,150,.10),transparent 60%);">
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#c9b896;letter-spacing:.1em;">01</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:16px 0 14px;line-height:1.15;">El efecto halo</h3>
+          <p style="font-size:14px;line-height:1.65;color:#8a857d;font-weight:300;margin:0;">Por qué juzgas competente a quien te parece atractivo, y decides sin darte cuenta de que ya decidiste.</p>
+          <span style="margin-top:auto;padding-top:22px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;">Sesgos cognitivos</span>
+        </div>
+        <div style="border:1px solid rgba(245,239,230,.10);padding:38px 34px;min-height:280px;display:flex;flex-direction:column;">
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#c9b896;letter-spacing:.1em;">02</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:16px 0 14px;line-height:1.15;">La sombra</h3>
+          <p style="font-size:14px;line-height:1.65;color:#8a857d;font-weight:300;margin:0;">Eso que niegas de ti y proyectas en los demás. Jung lo nombró; tú lo vives cada día.</p>
+          <span style="margin-top:auto;padding-top:22px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;">Psicología analítica</span>
+        </div>
+        <div style="border:1px solid rgba(245,239,230,.10);padding:38px 34px;min-height:280px;display:flex;flex-direction:column;">
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#c9b896;letter-spacing:.1em;">03</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:16px 0 14px;line-height:1.15;">Persuasión</h3>
+          <p style="font-size:14px;line-height:1.65;color:#8a857d;font-weight:300;margin:0;">Reciprocidad, escasez, prueba social. Las palancas que te mueven antes de que pienses.</p>
+          <span style="margin-top:auto;padding-top:22px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;">Influencia</span>
+        </div>
+        <div style="border:1px solid rgba(245,239,230,.10);padding:38px 34px;min-height:280px;display:flex;flex-direction:column;">
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#c9b896;letter-spacing:.1em;">04</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:16px 0 14px;line-height:1.15;">Apego y vínculos</h3>
+          <p style="font-size:14px;line-height:1.65;color:#8a857d;font-weight:300;margin:0;">De quién dependes más de lo que te gustaría admitir, y por qué repites el mismo patrón.</p>
+          <span style="margin-top:auto;padding-top:22px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;">Relaciones</span>
+        </div>
+        <div style="border:1px solid rgba(245,239,230,.10);padding:38px 34px;min-height:280px;display:flex;flex-direction:column;">
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#c9b896;letter-spacing:.1em;">05</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:16px 0 14px;line-height:1.15;">Autoengaño</h3>
+          <p style="font-size:14px;line-height:1.65;color:#8a857d;font-weight:300;margin:0;">Las historias que te cuentas para no cambiar. Cómodas, convincentes y casi siempre falsas.</p>
+          <span style="margin-top:auto;padding-top:22px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;">Defensas</span>
+        </div>
+        <div style="border:1px solid rgba(245,239,230,.10);padding:38px 34px;min-height:280px;display:flex;flex-direction:column;background:radial-gradient(ellipse at 70% 80%,rgba(201,184,150,.08),transparent 60%);">
+          <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:#c9b896;letter-spacing:.1em;">06</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:30px;color:#f5efe6;margin:16px 0 14px;line-height:1.15;">Memoria y sesgo</h3>
+          <p style="font-size:14px;line-height:1.65;color:#8a857d;font-weight:300;margin:0;">Tu memoria no graba: reescribe. Recuerdas la versión que necesitas, no la que ocurrió.</p>
+          <span style="margin-top:auto;padding-top:22px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;">Cognición</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA / PREPARAR TERRENO -->
+  <div style="position:relative;padding:clamp(80px,12vw,140px) clamp(24px,5vw,56px);text-align:center;overflow:hidden;border-top:1px solid rgba(245,239,230,.06);">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(201,184,150,.08),transparent 60%);pointer-events:none;"></div>
+    <div style="position:relative;font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:26px;">Nuevo</div>
+    <h2 style="position:relative;font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,6vw,64px);line-height:1.05;letter-spacing:-.01em;max-width:18ch;margin:0 auto;color:#f5efe6;">¿Piensas o sientes primero? Hazte el <em style="font-style:italic;color:#c9b896;">test</em></h2>
+    <p style="position:relative;margin:26px auto 0;max-width:46ch;color:#8a857d;font-size:16px;line-height:1.7;font-weight:300;">15 preguntas, tres minutos, y una guía para profundizar cuando quieras ir más allá del resultado.</p>
+    <div style="position:relative;margin-top:56px;padding:12px;">
+      <a href="./test.html" style="display:inline-flex;background:#f5efe6;color:#0a0a0a;padding:20px 46px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:500;align-items:center;gap:12px;">Hacer el test<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+    </div>
+    <a href="https://www.tiktok.com/@menteenigma" target="_blank" style="position:relative;display:block;margin-top:20px;color:#8a857d;font-size:11px;letter-spacing:.2em;text-transform:uppercase;">o sígueme en TikTok</a>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="padding:64px clamp(24px,5vw,56px) 40px;border-top:1px solid rgba(245,239,230,.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;background:#0a0a0a;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;letter-spacing:.32em;color:#f5efe6;">M·E·C</div>
+    <div style="display:flex;gap:28px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;"><a href="https://www.tiktok.com/@menteenigma" target="_blank">TikTok</a><a href="#">Instagram</a><a href="#">YouTube</a></div>
+    <span style="font-size:11px;letter-spacing:.18em;color:#8a857d;">© 2026 Mente Enigma · @menteenigma</span>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>
