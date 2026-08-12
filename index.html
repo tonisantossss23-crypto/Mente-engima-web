@@ -61,6 +61,29 @@
     <div style="position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:3;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:#8a857d;display:flex;flex-direction:column;align-items:center;gap:12px;">@menteenigma4<span style="width:1px;height:44px;background:linear-gradient(180deg,#9a9590,transparent);animation:dropline 2.4s ease-in-out infinite;"></span></div>
   </div>
 
+  <!-- GANCHO -->
+  <div style="position:relative;padding:clamp(70px,10vw,120px) clamp(24px,5vw,56px);border-top:1px solid rgba(245,239,230,.06);background:linear-gradient(180deg,#0a0a0a,#111110);">
+    <div style="max-width:640px;margin:0 auto;text-align:center;">
+
+      <sc-if value="{{ isHookQuestion }}">
+        <div style="font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:26px;">Antes de seguir bajando</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,4vw,36px);line-height:1.3;color:#f5efe6;margin:0 0 40px;">Si tuvieras que arrepentirte de algo...</h2>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <button onclick="{{ chooseHookA }}" style="text-align:left;background:transparent;border:1px solid rgba(245,239,230,.14);color:#cfc8bd;padding:22px 26px;font-size:16px;font-family:inherit;font-weight:300;cursor:pointer;line-height:1.5;">Sería de una decisión mal calculada.</button>
+          <button onclick="{{ chooseHookB }}" style="text-align:left;background:transparent;border:1px solid rgba(245,239,230,.14);color:#cfc8bd;padding:22px 26px;font-size:16px;font-family:inherit;font-weight:300;cursor:pointer;line-height:1.5;">Sería de no haber dicho lo que sentía.</button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isHookAnswered }}">
+        <div style="font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:#9a9590;margin-bottom:26px;">Tu primer reflejo</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(28px,4.2vw,40px);line-height:1.35;color:#f5efe6;margin:0 0 22px;">{{ hookReveal }}</h2>
+        <p style="color:#8a857d;font-size:15px;line-height:1.7;font-weight:300;margin:0 0 40px;">Pero una respuesta no es un patrón. Quedan 14.</p>
+        <a href="{{ hookTestUrl }}" style="display:inline-flex;align-items:center;gap:12px;background:#f5efe6;color:#0a0a0a;padding:18px 40px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;font-weight:500;">Continuar el test<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+      </sc-if>
+
+    </div>
+  </div>
+
   <!-- SOBRE MÍ -->
   <div id="sobre" style="max-width:1400px;margin:0 auto;padding:clamp(80px,12vw,140px) clamp(24px,5vw,56px);display:grid;grid-template-columns:0.85fr 1.15fr;gap:clamp(40px,6vw,72px);align-items:center;border-top:1px solid rgba(245,239,230,.06);">
     <div style="position:relative;aspect-ratio:4/5;overflow:hidden;border:1px solid rgba(245,239,230,.12);background:radial-gradient(ellipse 70% 60% at 50% 35%,rgba(201,184,150,.18),transparent 65%),linear-gradient(135deg,#1a1816 0%,#0a0a0a 70%);">
@@ -155,5 +178,28 @@
 
 </div>
 </x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { hookAnswer: null };
+
+  chooseHook = (type) => this.setState({ hookAnswer: type });
+
+  renderVals() {
+    const { hookAnswer } = this.state;
+    const reveals = {
+      r: 'Tu primer reflejo fue el cálculo — el sistema lento, el que mide y corrige.',
+      e: 'Tu primer reflejo fue lo que callaste — el sistema rápido, el que siente antes de justificar.'
+    };
+    return {
+      isHookQuestion: !hookAnswer,
+      isHookAnswered: !!hookAnswer,
+      hookReveal: hookAnswer ? reveals[hookAnswer] : '',
+      hookTestUrl: hookAnswer ? `./test.html?q1=${hookAnswer}` : './test.html',
+      chooseHookA: () => this.chooseHook('r'),
+      chooseHookB: () => this.chooseHook('e')
+    };
+  }
+}
+</script>
 </body>
 </html>

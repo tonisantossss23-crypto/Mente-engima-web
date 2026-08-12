@@ -119,7 +119,13 @@ class Component extends DCLogic {
   SUPABASE_URL = 'https://wzjqkyxvszciodytovki.supabase.co';
   SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6anFreXh2c3pjaW9keXRvdmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NjkzODMsImV4cCI6MjEwMjA0NTM4M30.elZEf3qbnuuFNGcJsUajM72OcPUkyHQoZHAh0FUv1KI';
 
+  constructor(props) {
+    super(props);
+    this.applyIncomingHook();
+  }
+
   questions = [
+    { text: 'Si tuvieras que arrepentirte de algo...', a: 'Sería de una decisión mal calculada.', b: 'Sería de no haber dicho lo que sentía.' },
     { text: 'Cuando tomas una decisión importante...', a: 'Hago una lista de pros y contras.', b: 'Sigo lo que me dice el cuerpo.' },
     { text: 'Ante un conflicto con alguien...', a: 'Busco los hechos antes de opinar.', b: 'Necesito sentir que me entienden.' },
     { text: 'Si algo no tiene lógica pero funciona...', a: 'No lo acepto del todo, aunque funcione.', b: 'Me da igual por qué, si funciona.' },
@@ -133,12 +139,23 @@ class Component extends DCLogic {
     { text: 'Ver una película triste...', a: 'La analizo, entiendo por qué funciona.', b: 'La vivo, me quedo tocado un rato.' },
     { text: 'Cuando alguien no cumple lo prometido...', a: 'Reviso los hechos antes de juzgar.', b: 'Se me nota en la cara al instante.' },
     { text: 'Un buen día es aquel en el que...', a: 'Fui productivo y logré lo que quería.', b: 'Me sentí en paz con alguien.' },
-    { text: 'Explicas mejor las cosas...', a: 'Con datos y estructura.', b: 'Con ejemplos que se sienten cercanos.' },
-    { text: 'Si tuvieras que arrepentirte de algo...', a: 'Sería de una decisión mal calculada.', b: 'Sería de no haber dicho lo que sentía.' }
+    { text: 'Explicas mejor las cosas...', a: 'Con datos y estructura.', b: 'Con ejemplos que se sienten cercanos.' }
   ];
 
   start = () => this.setState({ screen: 'question', qIndex: 0, rCount: 0, eCount: 0 });
   restart = () => this.setState({ screen: 'intro', qIndex: 0, rCount: 0, eCount: 0 });
+
+  applyIncomingHook() {
+    const params = new URLSearchParams(location.search);
+    const q1 = params.get('q1');
+    if (q1 === 'r' || q1 === 'e') {
+      this.state.screen = 'question';
+      this.state.qIndex = 1;
+      this.state.rCount = q1 === 'r' ? 1 : 0;
+      this.state.eCount = q1 === 'e' ? 1 : 0;
+      history.replaceState(null, '', location.pathname);
+    }
+  }
 
   choose = (type) => {
     this.setState((s) => {
