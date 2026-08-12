@@ -74,6 +74,11 @@
         <span>Emocional {{ ePct }}%</span>
       </div>
 
+      <button onclick="{{ shareResult }}" style="margin-top:28px;background:transparent;border:1px solid rgba(245,239,230,.2);color:#f5efe6;cursor:pointer;padding:15px 30px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;font-family:inherit;display:inline-flex;align-items:center;gap:10px;">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .05 3.9L8.91 11.5a3 3 0 1 0 0 5l6.14 3.6a3 3 0 1 0 .77-1.72L9.7 14.8a3 3 0 0 0 0-1.6l6.12-3.58c.31.24.66.42 1.03.53"/></svg>
+        {{ shareLabel }}
+      </button>
+
       <div style="margin-top:40px;text-align:left;border:1px solid rgba(245,239,230,.12);background:linear-gradient(180deg,rgba(201,184,150,.05),rgba(201,184,150,0));padding:26px 30px;">
         <div style="font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:#c9b896;margin-bottom:12px;">La base científica</div>
         <p style="margin:0;font-size:14px;line-height:1.75;color:#cfc8bd;font-weight:300;">Esta clasificación no es un horóscopo. Viene de la <strong style="color:#f5efe6;font-weight:500;">teoría del procesamiento dual</strong> (Kahneman, Evans): convivimos con dos sistemas de pensamiento — uno rápido e intuitivo, otro lento y deliberado. Tu resultado no mide tu personalidad, mide cuál de los dos toma el mando con más frecuencia en tu día a día.</p>
@@ -109,7 +114,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { screen: 'intro', qIndex: 0, rCount: 0, eCount: 0, emailValue: '', emailSubmitted: false, emailSubmitting: false, emailError: '' };
+  state = { screen: 'intro', qIndex: 0, rCount: 0, eCount: 0, emailValue: '', emailSubmitted: false, emailSubmitting: false, emailError: '', shareLabel: 'Compartir resultado' };
 
   SUPABASE_URL = 'https://wzjqkyxvszciodytovki.supabase.co';
   SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6anFreXh2c3pjaW9keXRvdmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NjkzODMsImV4cCI6MjEwMjA0NTM4M30.elZEf3qbnuuFNGcJsUajM72OcPUkyHQoZHAh0FUv1KI';
@@ -145,6 +150,129 @@ class Component extends DCLogic {
     });
   };
 
+  wrapText(ctx, text, x, y, maxWidth, lineHeight) {
+    const words = text.split(' ');
+    let line = '';
+    let lines = [];
+    for (const word of words) {
+      const test = line ? line + ' ' + word : word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+    lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight));
+    return lines.length * lineHeight;
+  }
+
+  async buildShareImage() {
+    const { resultTitle, resultDesc, rPct, ePct } = this.renderVals();
+    const W = 1080, H = 1920;
+    const canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    const ctx = canvas.getContext('2d');
+
+    try {
+      await Promise.all([
+        document.fonts.load('italic 400 90px "Cormorant Garamond"'),
+        document.fonts.load('italic 300 44px "Cormorant Garamond"'),
+        document.fonts.load('600 26px "Inter"'),
+        document.fonts.load('300 30px "Inter"')
+      ]);
+    } catch (e) {}
+
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, W, H);
+
+    const glow = ctx.createRadialGradient(W/2, 620, 0, W/2, 620, 700);
+    glow.addColorStop(0, 'rgba(201,184,150,.22)');
+    glow.addColorStop(1, 'rgba(201,184,150,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, H);
+
+    ctx.textAlign = 'center';
+
+    ctx.fillStyle = '#9a9590';
+    ctx.font = '600 24px Inter, sans-serif';
+    ctx.fillText('M · E · N · T · E   E · N · I · G · M · A', W/2, 150);
+
+    ctx.fillStyle = '#c9b896';
+    ctx.font = '600 22px Inter, sans-serif';
+    ctx.fillText('T U   R E S U L T A D O', W/2, 420);
+
+    ctx.fillStyle = '#f5efe6';
+    ctx.font = 'italic 400 96px "Cormorant Garamond", serif';
+    ctx.fillText(resultTitle, W/2, 560);
+
+    ctx.fillStyle = '#cfc8bd';
+    ctx.font = '300 32px Inter, sans-serif';
+    this.wrapText(ctx, resultDesc, W/2, 660, 780, 46);
+
+    const barY = 980, barW = 780, barX = (W - barW) / 2, barH = 18;
+    const rW = Math.round(barW * rPct / 100);
+    ctx.fillStyle = '#c9b896';
+    ctx.fillRect(barX, barY, rW, barH);
+    ctx.fillStyle = 'rgba(245,239,230,.14)';
+    ctx.fillRect(barX + rW, barY, barW - rW, barH);
+
+    ctx.font = '600 22px Inter, sans-serif';
+    ctx.fillStyle = '#8a857d';
+    ctx.textAlign = 'left';
+    ctx.fillText(`RACIONAL ${rPct}%`, barX, barY + 56);
+    ctx.textAlign = 'right';
+    ctx.fillText(`EMOCIONAL ${ePct}%`, barX + barW, barY + 56);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#9a9590';
+    ctx.font = '300 30px Inter, sans-serif';
+    ctx.fillText('¿Tú cuál eres?', W/2, 1660);
+    ctx.fillStyle = '#f5efe6';
+    ctx.font = 'italic 300 46px "Cormorant Garamond", serif';
+    ctx.fillText('menteenigma.com', W/2, 1720);
+
+    ctx.fillStyle = '#6f6a62';
+    ctx.font = '600 22px Inter, sans-serif';
+    ctx.fillText('@menteenigma4', W/2, 1830);
+
+    return new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+  }
+
+  shareResult = async () => {
+    this.setState({ shareLabel: 'Generando…' });
+    try {
+      const blob = await this.buildShareImage();
+      const file = new File([blob], 'mi-resultado-mente-enigma.png', { type: 'image/png' });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: 'Mente Enigma — ¿Piensas o sientes primero?',
+          text: 'Hice el test. Haz el tuyo en menteenigma.com'
+        });
+        this.setState({ shareLabel: 'Compartir resultado' });
+      } else {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'mi-resultado-mente-enigma.png';
+        a.click();
+        URL.revokeObjectURL(url);
+        this.setState({ shareLabel: 'Imagen descargada' });
+        setTimeout(() => this.setState({ shareLabel: 'Compartir resultado' }), 2500);
+      }
+    } catch (err) {
+      if (err && err.name === 'AbortError') {
+        this.setState({ shareLabel: 'Compartir resultado' });
+      } else {
+        this.setState({ shareLabel: 'No se pudo generar' });
+        setTimeout(() => this.setState({ shareLabel: 'Compartir resultado' }), 2500);
+      }
+    }
+  };
+
   updateEmail = (e) => this.setState({ emailValue: e.target.value, emailError: '' });
 
   submitEmail = async () => {
@@ -175,7 +303,7 @@ class Component extends DCLogic {
   };
 
   renderVals() {
-    const { screen, qIndex, rCount, eCount, emailValue, emailSubmitted, emailSubmitting, emailError } = this.state;
+    const { screen, qIndex, rCount, eCount, emailValue, emailSubmitted, emailSubmitting, emailError, shareLabel } = this.state;
     const total = this.questions.length;
     const q = this.questions[Math.min(qIndex, total - 1)];
     const answered = rCount + eCount;
@@ -203,7 +331,8 @@ class Component extends DCLogic {
       chooseA: () => this.choose('r'), chooseB: () => this.choose('e'),
       isEmailForm: !emailSubmitted, isEmailDone: emailSubmitted,
       emailValue, emailError, updateEmail: this.updateEmail, submitEmail: this.submitEmail,
-      emailButtonLabel: emailSubmitting ? 'Enviando…' : 'Avisarme'
+      emailButtonLabel: emailSubmitting ? 'Enviando…' : 'Avisarme',
+      shareLabel, shareResult: this.shareResult
     };
   }
 }
