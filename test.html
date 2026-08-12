@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <x-dc>
@@ -78,6 +79,21 @@
         <p style="margin:0;font-size:14px;line-height:1.75;color:#cfc8bd;font-weight:300;">Esta clasificación no es un horóscopo. Viene de la <strong style="color:#f5efe6;font-weight:500;">teoría del procesamiento dual</strong> (Kahneman, Evans): convivimos con dos sistemas de pensamiento — uno rápido e intuitivo, otro lento y deliberado. Tu resultado no mide tu personalidad, mide cuál de los dos toma el mando con más frecuencia en tu día a día.</p>
       </div>
 
+      <div style="margin-top:40px;text-align:left;border:1px solid rgba(245,239,230,.12);padding:26px 30px;">
+        <div style="font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:#9a9590;margin-bottom:12px;">Sigue profundizando</div>
+        <sc-if value="{{ isEmailDone }}">
+          <p style="margin:0;font-size:14px;line-height:1.7;color:#cfc8bd;font-weight:300;">Apuntado. Te escribo cuando haya algo que de verdad valga la pena leer.</p>
+        </sc-if>
+        <sc-if value="{{ isEmailForm }}">
+          <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#8a857d;font-weight:300;">Déjame tu email y te aviso cuando publique análisis más largos de cada patrón — sin spam, solo cuando haya algo que merezca la pena.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input type="email" placeholder="tu@email.com" value="{{ emailValue }}" oninput="{{ updateEmail }}" style="flex:1;min-width:200px;background:transparent;border:1px solid rgba(245,239,230,.18);color:#f5efe6;padding:14px 16px;font-size:14px;font-family:inherit;font-weight:300;">
+            <button onclick="{{ submitEmail }}" style="background:#f5efe6;color:#0a0a0a;border:none;cursor:pointer;padding:14px 26px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;font-family:inherit;">{{ emailButtonLabel }}</button>
+          </div>
+          <sc-if value="{{ emailError }}"><p style="margin:12px 0 0;font-size:12px;color:#c98a8a;">{{ emailError }}</p></sc-if>
+        </sc-if>
+      </div>
+
       <div style="margin-top:40px;border-top:1px solid rgba(245,239,230,.08);padding-top:44px;">
         <div style="font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#9a9590;margin-bottom:18px;">Esto es solo la superficie</div>
         <p style="color:#8a857d;font-size:15px;line-height:1.7;font-weight:300;max-width:44ch;margin:0 auto 34px;">Hay una guía que profundiza en cómo tu tipo de pensamiento decide por ti sin que lo notes — y qué hacer con eso.</p>
@@ -93,7 +109,10 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { screen: 'intro', qIndex: 0, rCount: 0, eCount: 0 };
+  state = { screen: 'intro', qIndex: 0, rCount: 0, eCount: 0, emailValue: '', emailSubmitted: false, emailSubmitting: false, emailError: '' };
+
+  SUPABASE_URL = 'https://wzjqkyxvszciodytovki.supabase.co';
+  SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind6anFreXh2c3pjaW9keXRvdmtpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY0NjkzODMsImV4cCI6MjEwMjA0NTM4M30.elZEf3qbnuuFNGcJsUajM72OcPUkyHQoZHAh0FUv1KI';
 
   questions = [
     { text: 'Cuando tomas una decisión importante...', a: 'Hago una lista de pros y contras.', b: 'Sigo lo que me dice el cuerpo.' },
@@ -126,8 +145,37 @@ class Component extends DCLogic {
     });
   };
 
+  updateEmail = (e) => this.setState({ emailValue: e.target.value, emailError: '' });
+
+  submitEmail = async () => {
+    const email = this.state.emailValue.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      this.setState({ emailError: 'Escribe un email válido.' });
+      return;
+    }
+    this.setState({ emailSubmitting: true, emailError: '' });
+    try {
+      const { rCount, eCount } = this.state;
+      const resultType = rCount >= 10 ? 'racional' : eCount >= 10 ? 'emocional' : 'hibrida';
+      const res = await fetch(`${this.SUPABASE_URL}/rest/v1/email_signups`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: this.SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${this.SUPABASE_ANON_KEY}`,
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({ email, result_type: resultType, source: 'test_result' })
+      });
+      if (!res.ok) throw new Error('request failed');
+      this.setState({ emailSubmitting: false, emailSubmitted: true });
+    } catch (err) {
+      this.setState({ emailSubmitting: false, emailError: 'No se pudo enviar. Prueba de nuevo.' });
+    }
+  };
+
   renderVals() {
-    const { screen, qIndex, rCount, eCount } = this.state;
+    const { screen, qIndex, rCount, eCount, emailValue, emailSubmitted, emailSubmitting, emailError } = this.state;
     const total = this.questions.length;
     const q = this.questions[Math.min(qIndex, total - 1)];
     const answered = rCount + eCount;
@@ -152,7 +200,10 @@ class Component extends DCLogic {
       qNumber: qIndex + 1, qTotal: total, qText: q.text, optA: q.a, optB: q.b,
       progressPct, rPct, ePct, resultTitle, resultDesc,
       start: this.start, restart: this.restart,
-      chooseA: () => this.choose('r'), chooseB: () => this.choose('e')
+      chooseA: () => this.choose('r'), chooseB: () => this.choose('e'),
+      isEmailForm: !emailSubmitted, isEmailDone: emailSubmitted,
+      emailValue, emailError, updateEmail: this.updateEmail, submitEmail: this.submitEmail,
+      emailButtonLabel: emailSubmitting ? 'Enviando…' : 'Avisarme'
     };
   }
 }
