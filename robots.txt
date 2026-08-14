@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Contenido de pago — no indexar
+Disallow: /ebook-guia.html
+Disallow: /Racional-vs-Emocional-Guia.pdf
+
+Sitemap: https://menteenigma.com/sitemap.xml
